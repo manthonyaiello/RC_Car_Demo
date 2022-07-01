@@ -1,0 +1,39 @@
+project Harness is
+    for Create_Missing_Dirs use "True";
+
+    for Languages use ("Ada");
+
+    for Main use ("harness.adb");
+
+    for Source_Dirs use (
+        "src/**",
+
+        --  The QGen-generated code for the motor and steering controller
+        "../generated/motor/**",
+        "../generated/controller/**",
+
+        --  Make the original RC Car sources available so that we can use the
+        --  Ada_Steering_Controller in simulation.
+        "../../src/**",
+
+        --  The Ada_Steering_Controller depends on the PID controller defined
+        --  here.
+        "../../../Robotics_with_Ada/src/control_systems/**"
+    );
+
+    --  We need to prevent the compiler from trying to compile the original
+    --  modules that we've mocked, so we exclude their source files from
+    --  consideration during the build.
+    for Excluded_Source_Files use (
+        "steering_control.adb",
+        "vehicle.adb"
+    );
+
+    for Object_Dir use "host-obj/";
+
+    package Compiler is
+      for Default_Switches ("ada") use Compiler'Default_Switches ("Ada") &
+        ("-gnatwa", "-gnatQ", "-gnatw.X", "-gnaty", "-gnatyO", "-gnatyM120",
+         "-ffunction-sections", "-fdata-sections");
+   end Compiler;
+end Harness;
