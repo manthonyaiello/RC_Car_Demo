@@ -13,15 +13,6 @@ package Simulator is
    --               allowing comparison of the results. The QGen controller
    --               will actually affect the plant.
 
-   function Steering_Offset return Float with Inline;
-   --  The angle at which the vehicle is steering straight ahead. Hard
-   --  right is always 0 and hard left is always Steering_Offset * 2.
-   --  This value is used to convert from the "observer's" frame of
-   --  reference to the vehicle's frame of reference.
-   --
-   --  Note that in the original RC Car demo, this value is computed at
-   --  starup by measuring steering travel to hard right and hard left.
-
    Encoder_Counts_Per_Degree : constant Motor_Encoder_Counts := 2;
    --  The number of encoder values reported per degree of rotation.
 

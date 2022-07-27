@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Info Type="StartUp" Visible="0" Icon="" File="Steering_Subsystem.slx" Name="Steering_Subsystem">
+    <Extension Value="ae34d031-8764-4a4b-b7a5-2f504d8a0a3e" Name="StartUpPrev" />
+</Info>

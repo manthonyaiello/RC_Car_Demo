@@ -13,8 +13,6 @@ with NXT_Motor;
 with NXT_Motor_states; use NXT_Motor_states;
 
 package body Simulator is
-   function Steering_Offset return Float is
-     (Float (45.0));
 
    procedure Simulate (Mode : Mode_Type) is
       QGen_State : Steering_Controller_State;
@@ -55,6 +53,10 @@ package body Simulator is
       Bias : constant Long_Float := 0.0;
       --  Bias parameter (mean for the noies) for the NXT motor.
 
+      Steering_Offset : constant Float := 45.0;
+      --  Constant stand-in for the value normally computed during harware
+      --  initialization of the Steering_Control.
+
 
       function Request_Steering_Angle (Step : Integer) return Integer_8;
       --  Lookup-Table-Like steering angle request.
@@ -88,11 +90,16 @@ package body Simulator is
    begin
       Encoder_Count := Motor_Encoder_Counts (Steering_Offset) * Encoder_Counts_Per_Degree;
 
-      Ada_Steering_Controller.Configure (Steering_Offset);
+      Ada_Steering_Controller.Configure  (Steering_Offset);
+      Ada_Steering_Controller.Initialize (State => Ada_State);
 
-      Ada_Steering_Controller.Initialize      (State => Ada_State);
-      Steering_Controller.initStates          (State => QGen_State);
-      NXT_Motor.initStates                    (State => Motor_State);
+      Steering_Controller.initStates
+        (Steering_Offset => Steering_Offset,
+         State           => QGen_State);
+
+      NXT_Motor.initStates
+        (Steering_Offset => Steering_Offset,
+         State           => Motor_State);
 
       for Step in 0 .. 200 loop
          Target_Angle  := Request_Steering_Angle (Step);

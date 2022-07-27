@@ -2,6 +2,7 @@ RC_Car_Demo/model
 =================
 
 This is the root directory for a set of Simulink models related to the LEGO RC Car.
+The models are organized and managed by a Simulink project, `Steering_Subsystem.prj`.
 
 This directory also contains an Ada simulation harness that allows back-to-back simulation of the QGen-generated steering controller and the original Ada steering controller.
 
@@ -30,17 +31,17 @@ This approach is meant to be illustrative of how Simulink and QGen would be used
 ## Running the Simulation ##
 
 Open MATLAB and set the current working directory to this directory.
-From the MATLAB command prompt, run:
+Open the Simulink project, `Steering_Subsystem.prj`.
+This will initialize your workspace with required types and open the model `Steering_Subsystem`.
 
-    init
-
-This will initialize your workspace with required types, Simulink parameters, and variables.
-
-Open `Steering_Subsystem.slx`.
-This is the simulation model with which you will be interacting.
+`Steering_Subsystem` is the simulation model with which you will be interacting.
 Click on Run button, which will run the simulation.
-Then click on the highlighted Simulation Data Inspector.
-This will allow you to plot various signals, for example, you can plot `Requested_Steering_Angle` and `Achieved_Steering_Angle` on the same plot to see the performance of the controller.
+
+Once the simulation is complete (Simulink shows "Ready" in the lower-left-hand corner), open the file `Steering_Subsystem_Data_View.mldatx`.
+This file opens and configures the Simulation Data Inspector.
+
+The Simulation Data Inpsector shows `Requested_Steering_Angle` plotted against the `Achieved_Steering_Angle` in the top view, which illustrates the performance of the controller.
+In the bottom view, you can see the `Steering_Power` - a signed representation of the controller output.
 
 ## Generating Code ##
 
