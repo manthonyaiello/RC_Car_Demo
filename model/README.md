@@ -23,7 +23,7 @@ Working with the models requires MATLAB Simulink.
 They were developed and tested using MATLAB R2018b.
 
 Generating code requires AdaCore's QGen code-generator for Simulink and Stateflow.
-Code generation was tested using QGen 23.0w (20220613).
+Code generation was tested using QGen 23.0w (20220726).
 
 The design of both models - and the steering controller, in particular - demonstrates how to control the interface QGen generates by binding type definitions and parameters to defined symbols in the Ada code.
 This approach is meant to be illustrative of how Simulink and QGen would be used in practice on large and complex software systems.
@@ -67,6 +67,14 @@ Here, we describe how to build and use the Ada simulation harness.
 
 Building the Ada simulation harness requires GNAT.
 The build was tested using GNAT Pro 22.2.
+
+## Dependencies ##
+
+Before starting the build, you will need to clone the `Robotics_with_Ada` repository from https://github.com/AdaCore/Robotics_with_Ada.
+You should place the clone *next to* this repository, so your directories should look like:
+
+    /path/to/parent/RC_Car_Demo
+    /path/to/parent/Robotics_with_Ada
 
 ## Building ##
 
